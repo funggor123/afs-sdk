@@ -54,7 +54,7 @@ func createSeedFile(blocks []Block, fileDir string) (string, error) {
 	return f.Name(), nil
 }
 
-func uploadBlocks(uploadNode unode.UploadNode, blockSizeInt int, uploadFilePath string, uploadFileName string, tempDirPath string, expDays string, field string) ([]Block, error) {
+func uploadBlocks(uploadNode unode.UploadNode, blockSizeInt int, uploadFilePath string, uploadFileName string, tempDirPath string, expDays string, field string, maxUploadThread int) ([]Block, error) {
 
 	var blockSize int64
 	blockSize = mbToBytes(blockSizeInt)

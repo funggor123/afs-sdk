@@ -20,7 +20,7 @@ resp:   afid 		 string   upload file afid
 		status       bool     upload status
 		message      string   if status = false, it will show the error message
 */
-func Upload(address string, field string, expireDays int, uploadMethod string, uploadFilePath string, uploadFileName string, blockSize int) string {
+func Upload(address string, field string, expireDays int, uploadMethod string, uploadFilePath string, uploadFileName string, blockSize int, maxUploadThread int) string {
 
 	expDays := strconv.Itoa(expireDays)
 
@@ -39,7 +39,7 @@ func Upload(address string, field string, expireDays int, uploadMethod string, u
 		}
 		return "_r=true;_afid=" + uploadResponse.Afid + ";"
 	case SEED:
-		blocks, err := uploadBlocks(uploadNode, blockSize, uploadFilePath, uploadFileName, tempDirPath, expDays, field)
+		blocks, err := uploadBlocks(uploadNode, blockSize, uploadFilePath, uploadFileName, tempDirPath, expDays, field, maxUploadThread)
 		if err !=nil {
 			return "_r=false;_message=blocks create/upload fail:" +  err.Error() + ";"
 		}

@@ -11,7 +11,10 @@ import (
 func main(){
 	cmd.Main()
 	if cmd.Configs.Action == "upload" {
-		result := afs_sdk.Upload(cmd.Configs.Address, cmd.Configs.Field, cmd.Configs.ExpDays, strconv.Itoa(cmd.Configs.Method), cmd.Configs.FilePath, cmd.Configs.FileName , cmd.Configs.BlockSize)
+		result := afs_sdk.Upload(cmd.Configs.Address, cmd.Configs.Field, cmd.Configs.ExpDays, strconv.Itoa(cmd.Configs.Method), cmd.Configs.FilePath, cmd.Configs.FileName , 
+		cmd.Configs.BlockSize,
+		cmd.Configs.MaxUploadThreads,
+	)
 		print(result + "\n")
 	}
 	helper.Terminate()

@@ -11,5 +11,4 @@ const (
 	BOTH = ""
 )
 
-const maxUploadThread = 5
 

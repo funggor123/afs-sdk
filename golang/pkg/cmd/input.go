@@ -15,6 +15,7 @@ type (
 		Method    int
 		ExpDays   int
 		BlockSize int
+		MaxUploadThreads int
 		Action    string
     }
 )
@@ -68,6 +69,11 @@ func Main() {
 			Value: 1,
 			Usage: "block size (In MB) ",
 		},
+		cli.IntFlag {
+			Name: "max_up_threads, max_ut",
+			Value: 5,
+			Usage: "Maximum Number of Upload Threads ",
+		},
     }
  
     app.Run(os.Args)
@@ -83,6 +89,7 @@ func run(c *cli.Context) error {
 		Method:   c.Int("method"),
 		ExpDays:  c.Int("expdays"), 
 		BlockSize: c.Int("size"), 
+		MaxUploadThreads: c.Int("max_up_threads"),
     }
     return exec()
 }
