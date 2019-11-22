@@ -33,6 +33,7 @@ func (uploadNode UploadNode) getUploadEndPoint() string {
 
 func (uploadNode UploadNode) Upload(field string, expireDays string, uploadMethod string, fileFullPath string) (UploadResponse, error) {
 	var uploadResponse UploadResponse
+	resty.SetRetryCount(3)
 	_, err := resty.R().
 		SetFile("file", fileFullPath).
 		SetResult(&uploadResponse).
