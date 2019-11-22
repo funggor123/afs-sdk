@@ -104,10 +104,11 @@ func uploadBlocks(uploadNode unode.UploadNode, blockSizeInt int, uploadFilePath 
 				} else {
 					Error = msg.transmissionError
 				}
+				if uploaderRemain == 1 {
+					wg.Done()
+				}
 			case <-c2:
-			}
-			if uploaderRemain == 1 {
-				wg.Done()
+
 			}
 			if Error != nil && uploaderRemain == maxUploadThread {
 				break
