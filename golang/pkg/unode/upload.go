@@ -3,6 +3,7 @@ package afs_sdk
 import (
 	resty "gopkg.in/resty.v1"
 	"errors"
+	"time"
 )
 
 // Constant // 
@@ -33,7 +34,9 @@ func (uploadNode UploadNode) getUploadEndPoint() string {
 
 func (uploadNode UploadNode) Upload(field string, expireDays string, uploadMethod string, fileFullPath string) (UploadResponse, error) {
 	var uploadResponse UploadResponse
-	resty.SetRetryCount(3)
+	resty.SetRetryCount(3).
+	SetRetryWaitTime(5 * time.Second).
+    SetRetryMaxWaitTime(20 * time.Second)
 	_, err := resty.R().
 		SetFile("file", fileFullPath).
 		SetResult(&uploadResponse).
